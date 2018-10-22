@@ -28,9 +28,7 @@ The destination table in SQL should be as minimal as possible - avoid using inde
 If possible, the database's recovery mode should be Simple or Bulk Logged.
 
 # Configuration and usage
-For the examples in code, go to Bango.SqlImport.Tests, SystemTests.
-You will need a connection string to the database in the constructor of BulkCopyUtility.
-The login you use should have Insert and Select permissions on the table you want to insert to.
+For the examples in code, go to Bango.SqlImport.Tests, SystemTests. Refer to the ReadMe of that project.
 
 ## Creating the right IDataReader implementation
 The main problem you will face is how to create the IDataReader implementation which handles all of your requirements.

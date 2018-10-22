@@ -108,7 +108,7 @@ var configurationText = "{
     },
     {
       "columnIndex": 1,
-      "columnName": "SourceTransactionId",
+      "columnName": "TransactionId",
       "columnDataType": "String",
       "valueSource": "ColumnValue"
     },

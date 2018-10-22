@@ -71,6 +71,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bango.SqlImport\Bango.SqlImport.csproj">

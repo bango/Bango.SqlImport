@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bango.SqlImport", "Bango.SqlImport.csproj", "{9B1CFF15-ADDD-41CD-ABBB-45E3E2E4C17D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bango.SqlImport", "Bango.SqlImport\Bango.SqlImport.csproj", "{9B1CFF15-ADDD-41CD-ABBB-45E3E2E4C17D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BB72A3FA-3190-44FA-8E65-F9CA42A70C5F}
+		SolutionGuid = {D80798BA-E723-451E-BDE1-572C28BFB793}
 	EndGlobalSection
 EndGlobal

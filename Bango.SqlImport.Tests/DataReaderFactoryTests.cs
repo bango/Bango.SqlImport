@@ -105,7 +105,7 @@ namespace Bango.SqlImport.Tests
         {
             return new CsvDataReaderConfiguration
             {
-                CsvFilePath = @"Files\ExampleFileToImport.csv",
+                CsvFilePath = @"Files\CsvFileToImport_NoTransformation.csv",
                 CsvColumnsCount = 5,
                 CsvHasHeaderRow = true,
                 ColumnDefinitions = new List<ColumnDefinition>

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulkCopyUtility.cs" />
+    <Compile Include="DataReader\Configuration\ColumnDefinition.cs" />
+    <Compile Include="DataReader\Configuration\CsvDataReaderConfiguration.cs" />
+    <Compile Include="DataReader\Configuration\ParamKeys.cs" />
+    <Compile Include="DataReader\Configuration\ValueSource.cs" />
+    <Compile Include="DataReader\Csv\CsvDataReader.cs" />
+    <Compile Include="DataReader\Csv\CsvDataReaderExtraColumns.cs" />
+    <Compile Include="DataReader\Decorators\DataReaderColumnMapping.cs" />
+    <Compile Include="DataReader\Decorators\DataReaderDecoratorBase.cs" />
+    <Compile Include="DataReader\Decorators\DataReaderExtraColumns.cs" />
+    <Compile Include="DataReader\Decorators\DataReaderValueTransformation.cs" />
+    <Compile Include="IBulkCopyUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

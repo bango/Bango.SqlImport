@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Bango.Data.SqlLink.Import.DataReader.Configuration;
-using Bango.Data.SqlLink.Import.DataReader.Csv;
-using Bango.Data.SqlLink.Import.DataReader.Decorators;
+using Bango.SqlImport.DataReader.Configuration;
+using Bango.SqlImport.DataReader.Csv;
+using Bango.SqlImport.DataReader.Decorators;
 
-namespace Bango.Data.SqlLink.Import.DataReader
+namespace Bango.SqlImport.DataReader
 {
     public class DataReaderFactory : IDataReaderFactory
     {

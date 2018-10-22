@@ -50,10 +50,12 @@
     <Compile Include="DataReader\Configuration\ValueSource.cs" />
     <Compile Include="DataReader\Csv\CsvDataReader.cs" />
     <Compile Include="DataReader\Csv\CsvDataReaderExtraColumns.cs" />
+    <Compile Include="DataReader\DataReaderFactory.cs" />
     <Compile Include="DataReader\Decorators\DataReaderColumnMapping.cs" />
     <Compile Include="DataReader\Decorators\DataReaderDecoratorBase.cs" />
     <Compile Include="DataReader\Decorators\DataReaderExtraColumns.cs" />
     <Compile Include="DataReader\Decorators\DataReaderValueTransformation.cs" />
+    <Compile Include="DataReader\IDataReaderFactory.cs" />
     <Compile Include="IBulkCopyUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

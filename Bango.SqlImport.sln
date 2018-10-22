@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bango.SqlImport", "Bango.SqlImport\Bango.SqlImport.csproj", "{9B1CFF15-ADDD-41CD-ABBB-45E3E2E4C17D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bango.SqlImport.Tests", "Bango.SqlImport.Tests\Bango.SqlImport.Tests.csproj", "{F47373B0-C7FE-4A6B-A8C5-EC8EBC2C1809}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9B1CFF15-ADDD-41CD-ABBB-45E3E2E4C17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B1CFF15-ADDD-41CD-ABBB-45E3E2E4C17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B1CFF15-ADDD-41CD-ABBB-45E3E2E4C17D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F47373B0-C7FE-4A6B-A8C5-EC8EBC2C1809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F47373B0-C7FE-4A6B-A8C5-EC8EBC2C1809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F47373B0-C7FE-4A6B-A8C5-EC8EBC2C1809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F47373B0-C7FE-4A6B-A8C5-EC8EBC2C1809}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

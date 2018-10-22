@@ -9,49 +9,45 @@ using NUnit.Framework;
 
 namespace Bango.SqlImport.Tests
 {
-    [Ignore("These are end to end tests dependent on files and database being accessible.")]
+    [Ignore("These are end to end tests. They rely on the SQL connectivity and the test table to run. Please, refer to ReadMe.md for details.")]
     public class SystemTests
     {
         private BulkCopyUtility bulkCopyUtility;
+        private string testTableName;
 
         [OneTimeSetUp]
         public void SetUp()
         {
             this.bulkCopyUtility = new BulkCopyUtility("{yourConnectionString}");
+            testTableName = "TransactionImport";
         }
         
-        [Test]
-        public void BulkCopy_ManualReaderCreation()
+        [TestCase(@"Files\CsvFileToImport_NoTransformation.csv")]
+        public void BulkCopy_ManualReaderCreation(string csvToImportFilePath)
         {
-            //Act
-            var dataReader = new CsvDataReaderExtraColumns("{yourFile}",
+            var dataReader = new CsvDataReaderExtraColumns(csvToImportFilePath,
                 new List<TypeCode>(5)
                 {
                     TypeCode.String,
                     TypeCode.Decimal,
+                    TypeCode.DateTime,
                     TypeCode.String,
-                    TypeCode.Boolean,
-                    TypeCode.DateTime
+                    TypeCode.Boolean
                 });
-            dataReader.AddExtraColumn("{ExtraColumnName}", -1);
-            this.bulkCopyUtility.BulkCopy("{YourTableName}", dataReader);
-
-            //Assert - you can write your asserts on the table here
+            dataReader.AddExtraColumn("ImportId", -1);
+            this.bulkCopyUtility.BulkCopy(testTableName, dataReader);
         }
 
-        [Test]
-        public void BulkCopy_ConfigurationDrivenReaderCreation()
+        [TestCase(@"Files\CsvFileToImport_ColumnMapping.csv", @"Files\CsvDataReaderConfig_ColumnMapping.json")]
+        [TestCase(@"Files\CsvFileToImport_ValueTransformation.csv", @"Files\CsvDataReaderConfig_ValueTransformation.json")]
+        public void BulkCopy_ConfigurationDrivenReaderCreation(string csvToImportFilePath, string csvConfigurationFilePath)
         {
-            //Arrange
-            string testConfig = File.ReadAllText("{YourConfigJsonFilePath}");
+            string testConfig = File.ReadAllText(csvConfigurationFilePath);
             var config = JsonConvert.DeserializeObject<CsvDataReaderConfiguration>(testConfig);
-            config.CsvFilePath = "{YourFilePath}";
+            config.CsvFilePath = csvToImportFilePath;
 
-            //Act
             var dataReader = new DataReaderFactory().GetCsvDataReader(config);
-            this.bulkCopyUtility.BulkCopy("", dataReader);
-
-            //Assert - you can write your asserts on the table here
+            this.bulkCopyUtility.BulkCopy(testTableName, dataReader);
         }
     }
 }

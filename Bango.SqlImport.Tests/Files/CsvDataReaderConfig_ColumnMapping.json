@@ -1,0 +1,44 @@
+﻿{
+  "csvHasHeaderRow": true,
+  "csvColumnsCount": 5,
+  "columnDefinitions": [
+    {
+      "columnIndex": 0,
+      "columnName": "TranId",
+      "columnDataType": "String",
+      "valueSource": "ColumnValue"
+    },
+    {
+      "columnIndex": 1,
+      "columnName": "TranAmount",
+      "columnDataType": "Decimal",
+      "valueSource": "ColumnValue"
+    },
+    {
+      "columnIndex": 2,
+      "columnName": "CurrencyIso3",
+      "columnDataType": "String",
+      "valueSource": "ColumnValue"
+    },
+    {
+      "columnIndex": 3,
+      "columnName": "Success",
+      "columnDataType": "Boolean",
+      "valueSource": "ColumnValue"
+    },
+    {
+      "columnIndex": 4,
+      "columnName": "TranDate",
+      "columnDataType": "DateTime",
+      "valueSource": "ColumnValue"
+    },
+    {
+      "columnName": "ImportId",
+      "columnDataType": "Int32",
+      "valueSource": "StaticValue",
+      "params": {
+        "value": -1
+      }
+    }
+  ]
+}

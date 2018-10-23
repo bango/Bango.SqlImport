@@ -1,44 +1,37 @@
 ﻿# Bango.SqlImport
 
-The purpose of this project is to provide a reliable, flexible and configuration driven way of importing data to database.
-One of the common problems with data import is loading the entire dataset into memory before making a SQL insert call (e.g. using a DataTable object).
+The purpose of this project is to provide a reliable, flexible and configuration driven way of importing data from data source (e.g. CSV file) to SQL database table.
+One of the common problems with data import is loading the entire dataset from file into memory before making a SQL insert call (e.g. using a DataTable class).
 This is dangerous because if the dataset is big the process can run out of memory on application side or SQL side (one massive insert transaction).
-This can be avoided by streaming the data from the source (e.g. CSV file) to the destination table using an implementation of IDataReader.
-This project provides this functionality and adds additional configuration options on top of it.
-
-# Additional configuration options
-## Column mapping
-Functionality to map different columns in the source (by index) to different columns in the destination (by table column name).
-The class that handles this is DataReaderColumnMapping decorator.
-
-## Static column values
-Sometimes you may want to populate the destination table's column with a static value for all imported rows.
-For example, you may have an ImportId column which will have the same value for all records which belong to the same import.
-This value is known at the time of import, but it's not a part of the import source data.
-You can specify a static value for all imported records by using DataReaderExtraColumns decorator class.
-
-## Value transformation
-Sometimes the source may contain information which has to be transformed before being imported to the destination table.
-For example, you may have a datetime column in your CSV which is in a local time zone.
-Or a boolean column where 'y' means true and 'n' means false.
-You can transform your data by using DataReaderExtraColumns decorator class.
-
-# Best practices
-The destination table in SQL should be as minimal as possible - avoid using indexes. Primary keys should be handled fine.
-If possible, the database's recovery mode should be Simple or Bulk Logged.
+This can be avoided by streaming data from the source to the destination table using an implementation of IDataReader.
+This project provides this functionality and adds additional configuration options on top of it (see below).
 
 # Configuration and usage
-For the examples in code, go to Bango.SqlImport.Tests, SystemTests. Refer to the ReadMe of that project.
+For examples in code, go to Bango.SqlImport.Tests, SystemTests. Refer to the ReadMe file of that project.
+The main problem you will face is how to create the IDataReader implementation which reads from your data source and implements the features you require.
+
+## Supported data sources
+* CSV
+
+## Configuration options
+* Column mapping
+Map different columns in the source (by index) to different columns in the destination (by table column name).
+* Additional, static column values
+Enrich data from source with additional columns with static values.
+* Value transformation
+Transform data from the source before it is inserted into the destination. Supported transformations:
+	* DateTime: local timezone to UTC
+	* Boolean: custom string parsing
 
 ## Creating the right IDataReader implementation
-The main problem you will face is how to create the IDataReader implementation which handles all of your requirements.
-You can do it all in code or use a json configuration driven approach. Refer to Bango.SqlImport.Tests, SystemTests for examples.
+You can create the implementation explicitly in code or use a configuration driven approach.
 
 ### Create IDataReader implementation in code
 #### Csv matches your table structure
-If your csv file matches 1 to 1 the table in the database, you can use this approach:
+If your csv file matches 1 to 1 the table in the database:
 
-//Instantiate the simple csv reader, providing the list of columns which matches 1 to 1 the data table structure.
+```csharp
+//Instantiate the reader, providing the list of columns which matches 1 to 1 the data table structure.
 var dataReader = new CsvDataReader(filePath,
                 new List<TypeCode>(5)
                 {
@@ -50,11 +43,13 @@ var dataReader = new CsvDataReader(filePath,
                 });
 
 bulkCopyUtility.BulkCopy("TableName", dataReader);
+```
 
 #### Csv matches your table structure, additional columns needed
-If your csv file matches 1 to 1 the table in the database, but you want to add some extra columns with static values, you can use this approach:
+If your csv file matches 1 to 1 the table in the database, but you want to add some extra columns with static values:
 
-//Instantiate the simple csv reader with extra columns capability, providing the list of columns which matches 1 to 1 the data table structure.
+```csharp
+//Instantiate the reader with extra columns capability, providing the list of columns which matches 1 to 1 the data table structure.
 var dataReader = new CsvDataReaderExtraColumns(filePath,
                 new List<TypeCode>(5)
                 {
@@ -66,6 +61,7 @@ var dataReader = new CsvDataReaderExtraColumns(filePath,
                 });
             dataReader.AddExtraColumn("ExtraColumnName", -1); //Add the extra columns with static values by calling this method.
             bulkCopyUtility.BulkCopy("TableName", dataReader);
+```
 
 ### Create IDataReader implementation based on configuration json
 If your case is more complex and you want to handle a mixture of additional requirements,
@@ -74,6 +70,7 @@ The easiest way to do it, is to form a json document and deserialize it to the c
 You can then for example store the configuration json in a table in a database and make changes to your import process without code deployments.
 The json structure is defined as follows:
 
+```csharp
 var configurationText = "{
   "csvHasHeaderRow": true, //Required. True if there's a header row in the CSV file.
   "csvColumnsCount": 5, //Required. Has to match how many rows your CSV file has (not the destination table).
@@ -135,5 +132,19 @@ var config = Newtonsoft.Json.JsonConvert.DeserializeObject<CsvDataReaderConfigur
 //Get data reader using the factory
 var dataReader = new DataReaderFactory().GetCsvDataReader(config);
 
-//Import from CSV
 bulkCopyUtility.BulkCopy("tableName", dataReader);
+```
+
+## Best practices
+The destination table in SQL should be as minimal as possible - avoid using indexes. Primary keys should be handled fine.
+If possible, the database's recovery mode should be Simple or Bulk Logged.
+
+# Built with
+* CsvHelper
+* Newtonsoft.Json
+
+# Authors
+* Michal Ciesielski
+
+# License
+See LICENSE file.

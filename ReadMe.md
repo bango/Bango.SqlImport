@@ -10,16 +10,13 @@ This project provides this functionality and adds additional configuration optio
 For examples in code, go to Bango.SqlImport.Tests, SystemTests. Refer to the ReadMe file of that project.
 The main problem you will face is how to create the IDataReader implementation which reads from your data source and implements the features you require.
 
-## Supported data sources
+## Supported IDataReader sources
 * CSV
 
-## Configuration options
-* Column mapping
-Map different columns in the source (by index) to different columns in the destination (by table column name).
-* Additional, static column values
-Enrich data from source with additional columns with static values.
-* Value transformation
-Transform data from the source before it is inserted into the destination. Supported transformations:
+## Additional IDataReader features
+* Column mapping: map different columns in the source (by index) to different columns in the destination (by table column name).
+* Additional, static column values: enrich data from source with additional columns with static values.
+* Value transformation: transform data from the source before it is inserted into the destination. Supported transformations:
 	* DateTime: local timezone to UTC
 	* Boolean: custom string parsing
 
